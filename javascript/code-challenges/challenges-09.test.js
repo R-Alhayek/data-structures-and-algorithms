@@ -10,9 +10,7 @@ E.g. [4,2,7,5,9,2] -> 9
 ------------------------------------------------------------------------------------------------ */
 const maxInArray = (arr) => {
   // Solution code here...
-  return arr.reduce((accumulator, currentValue) =>{
-   return Math.max(accumulator, currentValue);
-  });
+  return arr.reduce((a,b) => Math.max(a,b), 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -42,7 +40,12 @@ Write a function named checkValues that takes in an object and a value and retur
 
 const checkValues = (obj, value) => {
   // Solution code here...
-  return Object.values(obj).includes(value) ? true : false ;
+  let objectVal = Object.values(obj);
+  if (objectVal.includes(value)){
+    return true;
+  }else {
+    return false;
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -66,7 +69,13 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 const updateNumbers = (obj) => {
   // Solution code here...
-  return Object.entries(obj).map(value => value.join(': '));
+  // return Object.entries(obj).map(value => value.join(': '));
+  let array = [];
+  let newObj = Object.keys(obj);
+  newObj.map((key) => {
+    array.push(`${key}: ${obj[key]}`);
+  });
+  return array;
 };
 
 
@@ -123,7 +132,9 @@ const characters = [
 const getHouses = (arr) => {
   let houses = [];
   // Solution code here...
-  houses = arr.map(houseName =>houseName.house);
+  arr.map((character) =>{
+    houses.push(character.house);
+  });
   return houses;
 };
 
@@ -141,18 +152,18 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
-  let children;
-  arr.map(value => {
-    if (value.name == value.character){
-      if (value.children){
-        children = true;
+  let childrenarr;
+  arr.map((value) => {
+    if (value.name === character){
+      if (Object.values(value).includes(value.children)){
+        childrenarr = true;
       }
       else {
-        children = false;
+        childrenarr = false;
       }
     }
   });
-  return children;
+  return childrenarr;
 
 };
 
