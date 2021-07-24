@@ -9,8 +9,8 @@ Write a function named returnTen, takes in a string and uses split and splice to
 
 function returnTen(str){
   // Solution code here...
-  let items = str.split("");
-  let newItems = items.slice(items.length - 10, items.length);
+  let strItems = str.split("");
+  let newItems = strItems.slice(strItems.length - 10, strItems.length);
   return newItems;
 }
 
@@ -30,11 +30,10 @@ return: 23
 ------------------------------------------------------------------------------------------------ */
 const findMax = (matrix) => {
   // Solution code here...
-  return matrix.reduce((acc, curr) => {
-    return Math.max(acc, (curr.reduce((acc2, curr2) => {
-      return Math.max(acc2, curr2);
-    }, null)));
-  }, null);
+ let array = matrix.reduce((acc,val) => acc.concat(val),[]);
+ return array.reduce((a,b) => {
+   return (a > b ? a : b);
+ }, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -53,11 +52,13 @@ return: 35
 ------------------------------------------------------------------------------------------------ */
 const totalSum = (matrix) => {
   // Solution code here...
-  return matrix.reduce((acc, curr) => {
-    return acc + curr.reduce((acc2,curr2) => {
-      return acc2 + curr2;
-    },0);
-  },0);
+  let array = matrix.reduce((acc,val) => acc.concat(val),[]);
+  let sum =0;
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i];
+    
+  }
+  return sum;
 };
 
 
@@ -101,10 +102,13 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 
 const salesData = (hours, data) => {
   // Solution code here...
-  return data.reduce((acc, curr, i) => {
-    acc.push({sales : `${curr} cookies`, time : hours[i]});
-    return acc;
-  }, []);
+  let array = [];
+  let count = 0;
+  data.forEach(el => {
+    array.push({sales: `${el} cookies`, time: hours[count]});
+    count = count + 1;
+  });
+  return array;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -130,7 +134,8 @@ const errands = [
 
 const howManyTreats = (arr) => {
   // Solution code here...
-  return arr[2].items[1].quantity;
+  let petStore = arr[2];
+  return petStore.items[1].quantity;
 };
 
 /* ------------------------------------------------------------------------------------------------
